@@ -10,7 +10,7 @@ const [intiailState, setIntiailState] = useState({});
 
 
 useEffect(() => {
-    fetch("http://localhost:8080/ca2_backend_war_exploded/api/jokes").then(res =>{
+    fetch("http://localhost:8080/api/jokes").then(res =>{
         if(res.ok){
             return res.json()
         }
@@ -27,7 +27,7 @@ useEffect(() => {
             <h3>Homepage</h3>
 
 
-            <button class="btn">want to see a joke??</button>
+            <button className="btn">want to see a joke??</button>
 
             {!loggedIn ? (<div>no joke</div>) :
                 (<div>

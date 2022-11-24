@@ -6,14 +6,18 @@ import Contact from "./pages/Contact.jsx";
 import AdminPageDelete from "./pages/AdminPageDelete.jsx";
 import Header from "./components/Header.jsx";
 import apiFacade from "./utils/apiFacade.js";
+import facade from './utils/apiFacade.js';
 
 function App(props) {
 
     const [loggedIn, setLoggedIn] = useState(false)
+    const [role, setRole] = useState("")
+
 
     useEffect(() => {
         if(apiFacade.getToken()) setLoggedIn(true)
-    })
+        console.log(facade.getUserRoles())
+    }, [])
 
     const obj = {
         name: "TestName",
@@ -24,12 +28,12 @@ function App(props) {
 
     return (
         <>
-            <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
+            <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn} role={role}/>
             <Routes>
                 <Route path="/" element={<Home loggedIn={loggedIn}/>}/>
                 <Route path="search" element={<Search/>}/>
                 <Route path="contact" element={<Contact address={obj}/>}/>
-                <Route path="admin" element={<AdminPageDelete/>}/>
+                <Route path="admin" element={<AdminPageDelete/>} />
                 <Route path="*" element={<h1>Page Not Found !!!!</h1>}/>
             </Routes>
         </>

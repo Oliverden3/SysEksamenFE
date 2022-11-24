@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 
-function AdminPageDelete(props) {
+function AdminPageDelete({login}) {
 
     const inputRef = useRef();
     console.log(inputRef.current)

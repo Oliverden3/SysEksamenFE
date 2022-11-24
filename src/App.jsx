@@ -10,10 +10,12 @@ import apiFacade from "./utils/apiFacade.js";
 function App(props) {
 
     const [loggedIn, setLoggedIn] = useState(false)
+    const [role, setRole] = useState("")
 
     useEffect(() => {
-        if(apiFacade.getToken()) setLoggedIn(true)
+        if(apiFacade.getToken()) setLoggedIn(true), setRole(apiFacade.getUserRoles())
     })
+
 
     const obj = {
         name: "TestName",

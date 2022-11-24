@@ -5,7 +5,7 @@ import LoggedIn from "./LoggedIn.jsx";
 import "../styles/header.css";
 
 
-function Header({setErrorMsg, loggedIn, setLoggedIn}) {
+function Header({setErrorMsg, loggedIn, setLoggedIn, role}) {
 
 
     return (

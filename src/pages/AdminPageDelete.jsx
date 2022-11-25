@@ -8,7 +8,7 @@ function AdminPageDelete(props) {
 
 
     useEffect(() => {
-        fetch("http://localhost:8080/sys/api/info/all").then(res =>{
+        fetch("http://localhost:8080/sys/api/user/all").then(res =>{
             if(res.ok){
                 return res.json()
             }

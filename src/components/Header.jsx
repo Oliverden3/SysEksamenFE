@@ -3,10 +3,10 @@ import {NavLink} from "react-router-dom";
 import Login from "./Login.jsx";
 import LoggedIn from "./LoggedIn.jsx";
 import "../styles/header.css";
-import facade from "../utils/apiFacade.js";
 
 
-function Header({setErrorMsg, loggedIn, setLoggedIn}) {
+
+function Header({setErrorMsg, loggedIn, setLoggedIn, role}) {
 
 
     return (
@@ -14,7 +14,7 @@ function Header({setErrorMsg, loggedIn, setLoggedIn}) {
             <NavLink className="active" to="/"><i className="fa fa-fw fa-home"></i> Home</NavLink>
             <NavLink to="/search"><i className="fa fa-fw fa-search"></i> Search</NavLink>
 
-            {facade.getUserRoles() !== "admin" ? (<role setErrorMsg={setErrorMsg} />) :
+            {role !== "admin" ? (<role setErrorMsg={setErrorMsg} />) :
                 (<div>
                     <NavLink to="/admin"><i className="fa fa-fw fa-admin"></i> Admin Page</NavLink>
                 </div>)}

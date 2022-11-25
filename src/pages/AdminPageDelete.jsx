@@ -7,20 +7,17 @@ function AdminPageDelete(props) {
 
     return (
         <div>
-            <h1>AdminPageDelete</h1>
+            <h1>AdminPage</h1>
+
+            <input ref={inputRef} type="text" placeholder="Enter charity ID" />
             <form>
-                <input
-                    ref={inputRef}
-                    required
-                    type="AdminPageDelete"
-                    placeholder="AdminPageDelete...."
-                />
-                <button
+                <button type="submit">Delete</button>
+                {/*<button
                     type="submit"
                     onClick={() => {
                         inputRef.current.focus()
                     }}
-                >Submit</button>
+                >Submit</button>*/}
             </form>
         </div>
     );

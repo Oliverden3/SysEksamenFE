@@ -5,6 +5,7 @@ import LoggedIn from "./LoggedIn.jsx";
 import "../styles/header.css";
 
 
+
 function Header({setErrorMsg, loggedIn, setLoggedIn, role}) {
 
 
@@ -12,8 +13,15 @@ function Header({setErrorMsg, loggedIn, setLoggedIn, role}) {
         <nav className="topnav">
             <NavLink className="active" to="/"><i className="fa fa-fw fa-home"></i> Home</NavLink>
             <NavLink to="/search"><i className="fa fa-fw fa-search"></i> Search</NavLink>
-            <NavLink to="/admin"><i className="fa fa-fw fa-admin"></i> Admin Page</NavLink>
+
+            {role !== "admin" ? (<role setErrorMsg={setErrorMsg} />) :
+                (<div>
+                    <NavLink to="/admin"><i className="fa fa-fw fa-admin"></i> Admin Page</NavLink>
+                </div>)}
+
+
             <NavLink to="/contact"><i className="fa fa-fw fa-envelope"></i> Contact</NavLink>
+
             {!loggedIn ? (<Login setLoggedIn={setLoggedIn} setErrorMsg={setErrorMsg}  />) :
                 (<div>
                     <LoggedIn setLoggedIn={setLoggedIn}/>

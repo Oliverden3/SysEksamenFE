@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080";
+const URL = "http://localhost:8080/sys";
 
 function handleHttpErrors(res) {
     if (!res.ok) {
@@ -24,6 +24,26 @@ function apiFacade() {
     const logout = () => {
         localStorage.removeItem("jwtToken");
     }
+
+    const getUserRoles = () =>
+    {
+        const token = getToken()
+        if (token != null)
+        {
+            const payloadBase64 = getToken().split('.')[1]
+            const decodedClaims = JSON.parse(window.atob(payloadBase64))
+            const roles = decodedClaims.roles
+            return roles
+        } else return ""
+    }
+
+    const hasUserAccess = (neededRole, loggedIn) =>
+    {
+        const roles = getUserRoles().split(',')
+        return loggedIn && roles.includes(neededRole)
+    }
+
+
 
     const login = (user, password) => {
         const options = makeOptions("POST", true, {username: user, password: password});
@@ -66,7 +86,10 @@ function apiFacade() {
         loggedIn,
         login,
         logout,
-        fetchData
+        fetchData,
+        getUserRoles,
+        hasUserAccess
+
     }
 }
 

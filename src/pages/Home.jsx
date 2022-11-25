@@ -11,7 +11,8 @@ const [intiailState, setIntiailState] = useState({});
 
 
 useEffect(() => {
-    fetch("http://localhost:8080/sys/api/jokes").then(res =>{
+    fetch("http://localhost:8080/sys/api/jokes")
+        .then(res =>{
         if(res.ok){
             return res.json()
         }

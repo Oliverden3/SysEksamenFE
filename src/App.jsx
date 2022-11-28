@@ -4,6 +4,7 @@ import Home from "./pages/Home.jsx";
 import Search from "./pages/Search.jsx";
 import Contact from "./pages/Contact.jsx";
 import AdminPageDelete from "./pages/AdminPageDelete.jsx";
+import UserCreate from "./pages/UserCreate.jsx";
 import Header from "./components/Header.jsx";
 import apiFacade from "./utils/apiFacade.js";
 import facade from "./utils/apiFacade.js";
@@ -34,6 +35,7 @@ function App(props) {
                 <Route path="search" element={<Search/>}/>
                 <Route path="contact" element={<Contact address={obj}/>}/>
 
+                <Route path="userCreate" element={<UserCreate/>}/>
                 <Route path="admin" element={facade.hasUserAccess('admin', loggedIn) && <AdminPageDelete facade={facade} setErrorMessage={setErrorMessage}/>}/>
 
                 <Route path="*" element={<h1>Page Not Found !!!!</h1>}/>

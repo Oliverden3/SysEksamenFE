@@ -22,6 +22,8 @@ function Header({setErrorMsg, loggedIn, setLoggedIn, role}) {
 
             <NavLink to="/contact"><i className="fa fa-fw fa-envelope"></i> Contact</NavLink>
 
+            <NavLink to="/userCreate"><i className="fa fa-fw fa-envelope"></i> create user</NavLink>
+
             {!loggedIn ? (<Login setLoggedIn={setLoggedIn} setErrorMsg={setErrorMsg}  />) :
                 (<div>
                     <LoggedIn setLoggedIn={setLoggedIn}/>

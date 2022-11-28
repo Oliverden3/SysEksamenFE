@@ -37,6 +37,8 @@ function apiFacade() {
         } else return ""
     }
 
+
+
     const hasUserAccess = (neededRole, loggedIn) =>
     {
         const roles = getUserRoles().split(',')
@@ -88,7 +90,8 @@ function apiFacade() {
         logout,
         fetchData,
         getUserRoles,
-        hasUserAccess
+        hasUserAccess,
+
 
     }
 }

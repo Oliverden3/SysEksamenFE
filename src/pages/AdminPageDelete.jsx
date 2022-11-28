@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-function AdminPageDelete(props) {
+function AdminPageDelete({login}) {
 
     const inputRef = useRef();
     const [items, setItems] = useState([]);

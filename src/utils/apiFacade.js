@@ -87,9 +87,6 @@ function apiFacade() {
         fetchData,
         getUserRoles,
         hasUserAccess
-,
-        getUserRoles,
-        hasUserAccess
     }
 }
 

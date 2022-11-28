@@ -10,30 +10,13 @@ function UserCreate({loggedIn}) {
 
 
 
-    useEffect(() => {
-        fetch("http://localhost:8080/sys/api/jokes")
-            .then(res =>{
-                if(res.ok){
-                    return res.json()
-                }
-            }).then(jsonResponse => setIntiailState(jsonResponse))
-
-    }, [])
-
 
     return (
 
         <div>
             <h3>User Create page</h3>
 
-            <p>{}</p>
-
-            {!loggedIn ? (<div>you are logged in ass {apiFacade.getUserName()}</div>) :
-                (<div>
-
-                   <p>hello</p>
-
-                </div>)}
+            <p>you are logged in as: {apiFacade.getUserRoles()}</p>
 
 
 

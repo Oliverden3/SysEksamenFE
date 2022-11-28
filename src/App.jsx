@@ -8,6 +8,7 @@ import UserCreate from "./pages/UserCreate.jsx";
 import Header from "./components/Header.jsx";
 import apiFacade from "./utils/apiFacade.js";
 import facade from "./utils/apiFacade.js";
+import CharityPage from "./pages/CharityPage.jsx";
 
 function App(props) {
 
@@ -34,6 +35,7 @@ function App(props) {
                 <Route path="/" element={<Home loggedIn={loggedIn}/>}/>
                 <Route path="search" element={<Search/>}/>
                 <Route path="contact" element={<Contact address={obj}/>}/>
+                <Route path="CharityPage" element={<CharityPage/>}/>
 
                 <Route path="userCreate" element={<UserCreate/>}/>
                 <Route path="admin" element={facade.hasUserAccess('admin', loggedIn) && <AdminPageDelete facade={facade} setErrorMessage={setErrorMessage}/>}/>

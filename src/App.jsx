@@ -33,9 +33,7 @@ function App(props) {
                 <Route path="/" element={<Home loggedIn={loggedIn}/>}/>
                 <Route path="search" element={<Search/>}/>
                 <Route path="contact" element={<Contact address={obj}/>}/>
-
                 <Route path="admin" element={facade.hasUserAccess('admin', loggedIn) && <AdminPageDelete facade={facade} setErrorMessage={setErrorMessage}/>}/>
-
                 <Route path="*" element={<h1>Page Not Found !!!!</h1>}/>
             </Routes>
         </>

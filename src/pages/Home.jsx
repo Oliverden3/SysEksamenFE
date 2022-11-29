@@ -15,7 +15,7 @@ const [loading, setLoading] = useState(false)
 
 useEffect(() => {
     setLoading(true)
-    fetch("http://localhost:8080/api/charity/animals")
+ fetch("http://localhost:8080/api/charity/animals")
     .then(res =>{
         if(res.ok){
             return res.json()
@@ -94,12 +94,7 @@ const handleClick = async () => {
                 </a>
             </div>)}
         </div>
-
-                
-                )
-                
-                
-                }      
+)}      
 
 export default Home;
 

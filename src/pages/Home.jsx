@@ -8,8 +8,7 @@ import "../styles/home.css";
 
 function Home({loggedIn}) {
     
-const [items, setItems] = useState([]);
-const [loading, setLoading] = useState(false)
+
 const [data, setData] = useState([])
 const [isShown, setIsShown] = useState(false)
 
@@ -20,6 +19,7 @@ const handleClick = async (Category) => {
                 return res.json()
             }
         }).then(jsonResponse => setData(jsonResponse))
+
         setIsShown(current => !current)
 }
 
@@ -34,8 +34,11 @@ const handleClick = async (Category) => {
             {!loggedIn ? (<div className='greeting'>Please log in</div>) :
             (<div>
                 
-                <button onClick={handleClick("")}>
+                <button onClick={() => handleClick("animals")}>
                     Animals!
+                </button>
+                <button onClick={() => handleClick("education")}>
+                    Education!
                 </button>
                 {isShown && (
                     <div>
@@ -51,7 +54,7 @@ const handleClick = async (Category) => {
 
                         <tr>
                             <td>{charity.name}</td>
-                            <td>{charity.profileUrl}</td>
+                            <td> <a href={charity.profileUrl}>{charity.profileUrl}</a></td>
                             <td>{charity.tags +""}</td>
                         </tr>
 
@@ -63,8 +66,10 @@ const handleClick = async (Category) => {
                     </div>
 
                 )}
-                
 
+                
+                
+<br />
 
 
                 <a href='contact' className="container">

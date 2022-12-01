@@ -16,6 +16,14 @@ function AdminPageDelete({UserId}) {
         }).then(jsonResponse => setItems(jsonResponse))
     }, [])
 
+    const handleClick = async (Category) => {
+        await fetch("http://localhost:8080/api/charity/"+Category).then(res =>{
+            if(res.ok){
+                return res.json()
+            }
+        }).then(jsonResponse => setData(jsonResponse))
+    }
+
 
 
     return (

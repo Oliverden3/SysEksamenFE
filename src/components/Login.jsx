@@ -4,6 +4,7 @@ import facade from "../utils/apiFacade.js";
 function Login({setLoggedIn, setErrorMsg}) {
     const init = {username: "", password: ""};
     const [loginCredentials, setLoginCredentials] = useState(init);
+    const [Username, setUsername] = useState("");
 
     const performLogin = (evt) => {
         evt.preventDefault();
@@ -12,7 +13,9 @@ function Login({setLoggedIn, setErrorMsg}) {
 
     const login = (user, pass) => {
         facade.login(user, pass)
-            .then(res => setLoggedIn(true))
+            .then(res => {setLoggedIn(true)})
+            .then(setUsername(user))
+
     }
 
     const onChange = (evt) => {

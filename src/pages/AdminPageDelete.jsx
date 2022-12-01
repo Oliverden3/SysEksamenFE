@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-function AdminPageDelete({login}) {
+function AdminPageDelete({UserId}) {
 
     const inputRef = useRef();
     const [items, setItems] = useState([]);
@@ -8,14 +8,12 @@ function AdminPageDelete({login}) {
 
 
     useEffect(() => {
-        fetch("http://localhost:8080/sys/api/user/all").then(res =>{
+        fetch("http://localhost:8080/api/user/all")
+        .then(res =>{
             if(res.ok){
                 return res.json()
             }
         }).then(jsonResponse => setItems(jsonResponse))
-
-
-
     }, [])
 
 
@@ -25,6 +23,8 @@ function AdminPageDelete({login}) {
             <h1>AdminPage</h1>
 
 
+            {UserId}
+                
                 <ul>
                     <table>
                         <tr>

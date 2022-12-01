@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/sys";
+const URL = "http://localhost:8080";
 
 function handleHttpErrors(res) {
     if (!res.ok) {
@@ -25,6 +25,25 @@ function apiFacade() {
         localStorage.removeItem("jwtToken");
     }
 
+    const login = (user, password) => {
+        const options = makeOptions("POST", true, {username: user, password: password});
+        return fetch(URL + "/api/login", options)
+            .then(handleHttpErrors)
+            .then(res => {
+                //setToken(res.token)
+                const token = res.token
+                setToken(token)
+              //  const payloadBase64 = token.split('.')[1]
+               // const decodedClaims = JSON.parse(window.atob(payloadBase64))
+               // console.log(decodedClaims.username);
+            })
+    }
+
+    const fetchData = () => {
+        const options = makeOptions("GET", true);
+        return fetch(URL + "/api/user", options).then(handleHttpErrors);
+    }
+
     const getUserRoles = () =>
     {
         const token = getToken()
@@ -36,27 +55,37 @@ function apiFacade() {
             return roles
         } else return ""
     }
+    
+    const getUsername = () => {
+
+        const token = getToken()
+        if (token != null)
+        {
+            const payloadBase64 = token.split('.')[1]
+            const decodedClaims = JSON.parse(window.atob(payloadBase64))
+            console.log(decodedClaims);
+            const username = decodedClaims.username
+            return username
+        }
+        else return ""
+    }
+    const getUserId = () => {
+
+        const token = getToken()
+        if (token != null)
+        {
+            const payloadBase64 = token.split('.')[1]
+            const decodedClaims = JSON.parse(window.atob(payloadBase64))
+            const id = decodedClaims.id
+            return id
+        }
+        else return ""
+    }
 
     const hasUserAccess = (neededRole, loggedIn) =>
     {
         const roles = getUserRoles().split(',')
         return loggedIn && roles.includes(neededRole)
-    }
-
-
-
-    const login = (user, password) => {
-        const options = makeOptions("POST", true, {username: user, password: password});
-        return fetch(URL + "/api/login", options)
-            .then(handleHttpErrors)
-            .then(res => {
-                setToken(res.token)
-            })
-    }
-
-    const fetchData = () => {
-        const options = makeOptions("GET", true);
-        return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
     }
 
     function makeOptions(method, addToken, body) {
@@ -88,8 +117,10 @@ function apiFacade() {
         logout,
         fetchData,
         getUserRoles,
-        hasUserAccess
-
+        hasUserAccess,
+        getUsername,
+        getUserId
+        
     }
 }
 

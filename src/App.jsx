@@ -13,9 +13,11 @@ function App(props) {
     const [loggedIn, setLoggedIn] = useState(false)
     const [role, setRole] = useState("")
     const [errorMessage, setErrorMessage] = useState('All is good ... so far');
+    const [Username, setUsername] = useState("");
+    const [UserId, setUserId] = useState("");
 
     useEffect(() => {
-        if(apiFacade.getToken()) setLoggedIn(true), setRole(apiFacade.getUserRoles())
+        if(apiFacade.getToken()) setLoggedIn(true), setRole(apiFacade.getUserRoles(),setUsername(apiFacade.getUsername),setUserId(apiFacade.getUserId))
     })
 
 
@@ -30,10 +32,10 @@ function App(props) {
         <>
             <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn} setRole={setRole} role={role}/>
             <Routes>
-                <Route path="/" element={<Home loggedIn={loggedIn}/>}/>
+                <Route path="/" element={<Home loggedIn={loggedIn} Username={Username}/>}/>
                 <Route path="search" element={<Search/>}/>
                 <Route path="contact" element={<Contact address={obj}/>}/>
-                <Route path="admin" element={facade.hasUserAccess('admin', loggedIn) && <AdminPageDelete facade={facade} setErrorMessage={setErrorMessage}/>}/>
+                <Route path="admin" element={facade.hasUserAccess('admin', loggedIn) && <AdminPageDelete facade={facade} setErrorMessage={setErrorMessage} UserId={UserId}/>}/>
                 <Route path="*" element={<h1>Page Not Found !!!!</h1>}/>
             </Routes>
         </>

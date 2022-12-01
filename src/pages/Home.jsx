@@ -6,56 +6,45 @@ import LoggedIn from "../components/LoggedIn.jsx";
 import "../styles/home.css";
 
 
-function Home({loggedIn}) {
+
+
+function Home({loggedIn, Username}) {
     
-const [items, setItems] = useState([]);
-const [loading, setLoading] = useState(false)
+
+const [data, setData] = useState([])
+const [isShown, setIsShown] = useState(false)
 
 
 
-useEffect(() => {
-    setLoading(true)
-    fetch("http://localhost:8080/api/charity/animals")
-    .then(res =>{
-        if(res.ok){
-            return res.json()
-        }
-    }).then(jsonResponse => setItems(jsonResponse))
-    .catch((err) =>{
-        console.log(err);
-    })
-    .finally(() => {
-        setLoading(false)
-    })
-}, [])
-
-if (loading) {
-    return <p> Data is loading</p>
-}
-
-
-
-const handleClick = async () => {
-    fetch("http://localhost:8080/api/charity/animals").then(res =>{
+const handleClick = async (Category) => {
+   await fetch("http://localhost:8080/api/charity/"+Category).then(res =>{
             if(res.ok){
                 return res.json()
             }
         }).then(jsonResponse => setData(jsonResponse))
-        
-}
 
+        setIsShown(current => !current)
+}
 
     return (
 
 
         <div>
-            
+    
+            <p>Welcome, {Username}!</p>
             <h1 className='greeting'>Charities</h1>
 
             {!loggedIn ? (<div className='greeting'>Please log in</div>) :
             (<div>
-
-                <div className>
+                
+                <button onClick={() => handleClick("animals")}>
+                    Animals!
+                </button>
+                <button onClick={() => handleClick("education")}>
+                    Education!
+                </button>
+                {isShown && (
+                    <div>
                 <ul>
                     <table>
                         <tr>
@@ -64,20 +53,26 @@ const handleClick = async () => {
                             <th>Category:</th>
                         </tr>
 
-                    {items.nonprofits.map(charity =>( 
+                    {data.nonprofits.map(charity =>( 
 
                         <tr>
                             <td>{charity.name}</td>
-                            <td>{charity.profileUrl}</td>
+                            <td> <a href={charity.profileUrl}>{charity.profileUrl}</a></td>
                             <td>{charity.tags +""}</td>
                         </tr>
 
                     ))}
 
                     </table>
-                </ul>
-                </div>
+                </ul>                        
 
+                    </div>
+
+                )}
+
+                
+                
+<br />
 
 
                 <a href='contact' className="container">
@@ -94,12 +89,7 @@ const handleClick = async () => {
                 </a>
             </div>)}
         </div>
-
-                
-                )
-                
-                
-                }      
+)}      
 
 export default Home;
 

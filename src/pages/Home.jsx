@@ -6,11 +6,14 @@ import LoggedIn from "../components/LoggedIn.jsx";
 import "../styles/home.css";
 
 
-function Home({loggedIn}) {
+
+
+function Home({loggedIn, Username}) {
     
 
 const [data, setData] = useState([])
 const [isShown, setIsShown] = useState(false)
+
 
 
 const handleClick = async (Category) => {
@@ -23,12 +26,12 @@ const handleClick = async (Category) => {
         setIsShown(current => !current)
 }
 
-
     return (
 
 
         <div>
-            
+    
+            <p>Welcome, {Username}!</p>
             <h1 className='greeting'>Charities</h1>
 
             {!loggedIn ? (<div className='greeting'>Please log in</div>) :

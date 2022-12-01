@@ -30,7 +30,12 @@ function apiFacade() {
         return fetch(URL + "/api/login", options)
             .then(handleHttpErrors)
             .then(res => {
-                setToken(res.token)
+                //setToken(res.token)
+                const token = res.token
+                setToken(token)
+              //  const payloadBase64 = token.split('.')[1]
+               // const decodedClaims = JSON.parse(window.atob(payloadBase64))
+               // console.log(decodedClaims.username);
             })
     }
 
@@ -49,6 +54,32 @@ function apiFacade() {
             const roles = decodedClaims.roles
             return roles
         } else return ""
+    }
+    
+    const getUsername = () => {
+
+        const token = getToken()
+        if (token != null)
+        {
+            const payloadBase64 = token.split('.')[1]
+            const decodedClaims = JSON.parse(window.atob(payloadBase64))
+            console.log(decodedClaims);
+            const username = decodedClaims.username
+            return username
+        }
+        else return ""
+    }
+    const getUserId = () => {
+
+        const token = getToken()
+        if (token != null)
+        {
+            const payloadBase64 = token.split('.')[1]
+            const decodedClaims = JSON.parse(window.atob(payloadBase64))
+            const id = decodedClaims.id
+            return id
+        }
+        else return ""
     }
 
     const hasUserAccess = (neededRole, loggedIn) =>
@@ -86,7 +117,10 @@ function apiFacade() {
         logout,
         fetchData,
         getUserRoles,
-        hasUserAccess
+        hasUserAccess,
+        getUsername,
+        getUserId
+        
     }
 }
 

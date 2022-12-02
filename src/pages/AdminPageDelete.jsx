@@ -8,7 +8,7 @@ function AdminPageDelete({UserId}) {
 
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/user/all")
+        fetch("http://localhost:8080/BackEnd_CA2_war_exploded/api/user/all")
         .then(res =>{
             if(res.ok){
                 return res.json()
@@ -17,7 +17,7 @@ function AdminPageDelete({UserId}) {
     }, [])
 
     const handleClick = async (Category) => {
-        await fetch("http://localhost:8080/api/charity/"+Category).then(res =>{
+        await fetch("http://localhost:8080/BackEnd_CA2_war_exploded/api/charity/"+Category).then(res =>{
             if(res.ok){
                 return res.json()
             }
@@ -26,8 +26,24 @@ function AdminPageDelete({UserId}) {
 
 
 
+    const blackListwebsite = async (Category, Slug) => {
+        console.log("Category = "+ Category + ", Slug = " + Slug)
+        fetch("http://localhost:8080/BackEnd_CA2_war_exploded/api/charity/api/charity/"+Category+Slug)
+        .then(res => {
+            if(res.ok){
+                return res.json()
+            } 
+        }).then(jsonResponse => setItems(jsonResponse))
+    }
+
+
     return (
         <div>
+             <form action = {blackListwebsite}>
+                <input type="text" placeholder="Category" id="Category"/>
+                <input type="text" placeholder="Slug" id="Slug"/>
+                <input type="submit" value="Submit"/>
+            </form>
             <h1>AdminPage</h1>
 
 

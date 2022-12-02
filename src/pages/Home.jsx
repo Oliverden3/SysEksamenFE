@@ -4,6 +4,7 @@ import apiFacade from "../utils/apiFacade.js";
 import Login from "../components/Login.jsx";
 import LoggedIn from "../components/LoggedIn.jsx";
 import "../styles/home.css";
+import PostForm from "../components/PostForm.jsx";
 
 
 
@@ -30,11 +31,13 @@ const handleClick = async (Category) => {
 
 
         <div>
+
+
     
             <p>Welcome, {Username}!</p>
             <h1 className='greeting'>Charities</h1>
 
-            {!loggedIn ? (<div className='greeting'>Please log in</div>) :
+            {!loggedIn ? (<div className='greeting'>Please log in or create an account <PostForm/> </div>) :
             (<div>
                 
                 <button onClick={() => handleClick("animals")}>

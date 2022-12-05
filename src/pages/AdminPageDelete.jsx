@@ -22,7 +22,7 @@ function AdminPageDelete({UserId}) {
         <div>
             <h1>AdminPage</h1>
 
-
+        
             {UserId}
                 
                 <ul>

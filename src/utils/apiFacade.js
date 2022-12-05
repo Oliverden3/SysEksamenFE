@@ -30,12 +30,8 @@ function apiFacade() {
         return fetch(URL + "/api/login", options)
             .then(handleHttpErrors)
             .then(res => {
-                //setToken(res.token)
                 const token = res.token
                 setToken(token)
-              //  const payloadBase64 = token.split('.')[1]
-               // const decodedClaims = JSON.parse(window.atob(payloadBase64))
-               // console.log(decodedClaims.username);
             })
     }
 
@@ -107,6 +103,12 @@ function apiFacade() {
         }
         return opts;
     }
+    const createUser = (username,password, []) => {
+        const user =  {userName:username,
+                      userPass:password,
+                      roles:[]}
+                      return user
+    }
 
     return {
         makeOptions,
@@ -119,7 +121,8 @@ function apiFacade() {
         getUserRoles,
         hasUserAccess,
         getUsername,
-        getUserId
+        getUserId,
+        createUser
         
     }
 }

@@ -14,6 +14,7 @@ function Home({loggedIn, Username}) {
 
 const [data, setData] = useState([])
 const [isShown, setIsShown] = useState(false)
+const [isBlacklisted, setIsBlacklsited] = useState(false)
 
 
 
@@ -25,6 +26,12 @@ const handleClick = async (Category) => {
         }).then(jsonResponse => setData(jsonResponse))
 
         setIsShown(current => !current)
+}
+
+const handleCharityClick = async (charity) =>{
+    await fetch("http://localhost:8080/api/charity/"+charity.category+"+"+charity.slug)
+    console.log("Blacklisted charity with slug: " + charity.slug)
+    document.location.reaload
 }
 
     return (
@@ -62,6 +69,7 @@ const handleClick = async (Category) => {
                             <td>{charity.name}</td>
                             <td> <a href={charity.profileUrl}>{charity.profileUrl}</a></td>
                             <td>{charity.tags +""}</td>
+                            <td><button onClick={() => handleCharityClick(charity)}>Hej</button></td>
                         </tr>
 
                     ))}

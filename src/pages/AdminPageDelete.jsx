@@ -1,11 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
-import PostForm from "../components/PostForm.jsx";
+import BlacklistForm from "../components/BlacklistForm.jsx";
 
 function AdminPageDelete({UserId}) {
 
     const inputRef = useRef();
     const [items, setItems] = useState([]);
-    const [charity, setCharity] = useState([]);
+    const [user, setUser] = useState([]);
     console.log(inputRef.current)
 
 
@@ -17,7 +17,7 @@ function AdminPageDelete({UserId}) {
                 if(res.ok){
                     return res.json()
                 }
-            }).then(jsonResponse => setCharity(jsonResponse))
+            }).then(jsonResponse => setUser(jsonResponse))
     }, [])
 
 
@@ -40,12 +40,12 @@ function AdminPageDelete({UserId}) {
                             <th>Role</th>
                         </tr>
 
-                    {charity.map(item => (
+                    {user.map(item => (
 
                             <tr>
                                 <td>{item.id}</td>
                                 <td>{item.userName}</td>
-                                <td>{item.roles[0]}  {item.roles[1]}</td>
+                                <td>{item.roles.toString()}</td>
                             </tr>
 
                         ))}
@@ -55,7 +55,7 @@ function AdminPageDelete({UserId}) {
                     </table>
                 </ul>
 
-
+            <BlacklistForm/>
         </div>
     );
 }

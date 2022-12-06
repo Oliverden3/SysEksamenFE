@@ -23,15 +23,17 @@ const handleClick = async (Category) => {
             if(res.ok){
                 return res.json()
             }
-        }).then(jsonResponse => setData(jsonResponse))
+        }).then(jsonResponse => setData(jsonResponse.nonprofits))
 
         setIsShown(current => !current)
+
 }
 
 const handleCharityClick = async (charity) =>{
-    await fetch("http://localhost:8080/api/charity/"+charity.category+"+"+charity.slug)
+    const result = await fetch("http://localhost:8080/api/charity/"+charity.category+"+"+charity.slug)
     console.log("Blacklisted charity with slug: " + charity.slug)
-    document.location.reaload
+    const newCharity = await result.json()
+    setData(oldData =>[...oldData, newCharity])
 }
 
     return (
@@ -63,7 +65,7 @@ const handleCharityClick = async (charity) =>{
                             <th>Category:</th>
                         </tr>
 
-                    {data.nonprofits.map(charity =>( 
+                    {data.map(charity =>(
 
                         <tr>
                             <td>{charity.name}</td>

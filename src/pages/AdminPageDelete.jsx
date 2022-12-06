@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import PostForm from "../components/PostForm.jsx";
+import Blacklist from '../components/BlackListForm.jsx';
 
 function AdminPageDelete({UserId}) {
 
@@ -54,7 +55,7 @@ function AdminPageDelete({UserId}) {
 
                     </table>
                 </ul>
-
+                        <Blacklist/>
 
         </div>
     );

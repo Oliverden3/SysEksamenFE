@@ -16,7 +16,7 @@ function Home({loggedIn, Username}) {
     
 
 const [data, setData] = useState([])
-const [isShown, setIsShown] = useState(false)
+const [isShown, setIsShown] = useState(true)
     const navigate = useNavigate();
 
     const allCharitys = [
@@ -90,13 +90,14 @@ const [isShown, setIsShown] = useState(false)
 
 
 const handleClick = async (Category) => {
+
    await fetch("http://localhost:8080/api/charity/"+Category).then(res =>{
             if(res.ok){
                 return res.json()
             }
         }).then(jsonResponse => setData(jsonResponse.nonprofits))
 
-        setIsShown(current => !current)
+        /*setIsShown(current => !current)*/
 }
 
 const handleSpeseficCharity = (charity) =>{
@@ -121,11 +122,31 @@ const genetateButtons = () => {
     })
 }
 function generateCharityObj(charity){
+    let description = charity.description
+
+    if (description === undefined){
+        description = "No description available"
+    }else{
+        description = charity.description
+    }
+
+
     const charityObj = {
         name: charity.name,
         category: charity.category,
         slug: charity.slug,
+        description: description,
+        profileUrl: charity.profileUrl,
+
+
+
+
+
+
+
     }
+
+
     return charityObj
 }
 
@@ -147,20 +168,23 @@ function generateCharityObj(charity){
                     <div>
                 <ul>
                     <table>
+                        <thead>
                         <tr>
                             <th>Charity:</th>
                             <th>Website:</th>
                             <th>Category:</th>
                         </tr>
+                        </thead>
 
                     {data.map(charity =>(
 
+                        <tbody>
                         <tr>
                             <td>{charity.name}</td>
-                            <td> <a href={charity.profileUrl}>{charity.profileUrl}</a></td>
                             <td>{charity.tags +""}</td>
                             <td><button onClick={() => handleSpeseficCharity(generateCharityObj(charity))}>see more</button></td>
                         </tr>
+                        </tbody>
 
                     ))}
 

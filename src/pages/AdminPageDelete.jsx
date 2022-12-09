@@ -46,7 +46,7 @@ function AdminPageDelete({UserId}) {
 
 
 
-            {UserId}
+            this is the id: {UserId}
                 
                 <ul>
                     <table>

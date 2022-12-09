@@ -8,11 +8,12 @@ import PostForm from "../components/PostForm.jsx";
 import Contact from "./Contact.jsx";
 import {Route, Routes,useNavigate} from "react-router-dom";
 import SingleCharityPage from "./SingleCharityPage.jsx";
+import FavoriteForm from "../components/FavoriteForm.jsx";
 
 
 
 
-function Home({loggedIn, Username}) {
+function Home({loggedIn, Username, UserId}) {
     
 
 const [data, setData] = useState([])
@@ -106,21 +107,17 @@ const handleSpeseficCharity = (charity) =>{
         })
     }
 
+    const handelFavorite = async (charity) => {
 
+        await fetch("http://localhost:8080/api/favorite/" + UserId + "/" + charity.slug)
+    }
 
-
-const removeCharity = (charity) => {
-    setData(current =>
-      current.filter(obj => {
-        return obj !== charity;
-      }),
-    );
-  };
 const genetateButtons = () => {
     return allCharitys.map((Category) => {
         return <button onClick={() => handleClick(Category)}>{Category}</button>
     })
 }
+
 function generateCharityObj(charity){
     let description = charity.description
 
@@ -157,7 +154,7 @@ function generateCharityObj(charity){
 
 
     
-            <p>Welcome, {Username}!</p>
+            <p>Welcome, {Username}{} !</p>
             <h1 className='greeting'>Charities</h1>
 
             {!loggedIn ? (<div className='greeting'>Please log in or create an account <PostForm/> </div>) :
@@ -182,7 +179,9 @@ function generateCharityObj(charity){
                         <tr>
                             <td>{charity.name}</td>
                             <td>{charity.tags +""}</td>
+                            <td><button onClick={()=> handelFavorite(charity)}>this</button> </td>
                             <td><button onClick={() => handleSpeseficCharity(generateCharityObj(charity))}>see more</button></td>
+                           {/* <td><FavoriteForm charitySlug={charity.slug} userId={UserId}/></td>*/}
                         </tr>
                         </tbody>
 

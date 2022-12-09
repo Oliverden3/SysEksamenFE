@@ -21,7 +21,7 @@ const EditUser = () => {
             return res.json();
         }).then((res)=>{
             nameChange(res.userName);
-            roleChange(res.roleName);
+            roleChange(res.roleList[0]);
             console.log(res);
         }).catch((err)=>{
             console.log(err.message);

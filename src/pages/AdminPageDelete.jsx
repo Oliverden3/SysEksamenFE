@@ -1,12 +1,16 @@
 import React, {useEffect, useRef, useState} from 'react';
 import PostForm from "../components/PostForm.jsx";
 import Blacklist from '../components/BlackListForm.jsx';
+import axios from "axios";
+import EditUser from "../components/EditUser.jsx";
+import {useNavigate} from "react-router-dom";
 
 function AdminPageDelete({UserId}) {
 
     const inputRef = useRef();
     const [items, setItems] = useState([]);
     const [charity, setCharity] = useState([]);
+    const navigate = useNavigate();
     console.log(inputRef.current)
 
 
@@ -21,6 +25,17 @@ function AdminPageDelete({UserId}) {
             }).then(jsonResponse => setCharity(jsonResponse))
     }, [])
 
+    const handelDelete = (index) => {
+    axios.delete(`http://localhost:8080/api/user/${index}`)
+        setCharity([...charity]);
+    window.location.reload(false);
+    }
+
+    const handleSpeseficUserEdit = (chosenUserId) =>{
+        navigate('/editUser/'+chosenUserId, {
+            state: { userId: chosenUserId },
+        })
+    }
 
 
 
@@ -47,6 +62,8 @@ function AdminPageDelete({UserId}) {
                                 <td>{item.id}</td>
                                 <td>{item.userName}</td>
                                 <td>{item.roles[0]}  {item.roles[1]}</td>
+                                <td><button onClick={() => handleSpeseficUserEdit(item.id)}>edit</button></td>
+                                <button className="delete" onClick={()=>handelDelete(item.id)}>delete</button>
                             </tr>
 
                         ))}

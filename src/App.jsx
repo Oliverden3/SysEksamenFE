@@ -8,6 +8,7 @@ import Header from "./components/Header.jsx";
 import apiFacade from "./utils/apiFacade.js";
 import facade from "./utils/apiFacade.js";
 import SingleCharityPage from "./pages/SingleCharityPage.jsx";
+import EditUser from "./components/EditUser.jsx";
 
 function App(props) {
 
@@ -38,6 +39,7 @@ function App(props) {
                 <Route path="contact" element={<Contact address={obj}/>}/>
                 <Route path="SingleCharityPage" element={<SingleCharityPage/>}/>
                 <Route path="admin" element={facade.hasUserAccess('admin', loggedIn) && <AdminPageDelete facade={facade} setErrorMessage={setErrorMessage} UserId={UserId}/>}/>
+                <Route path="editUser/:usid" element={<EditUser/>}/>
                 <Route path="*" element={<h1>Page Not Found !!!!</h1>}/>
             </Routes>
         </>

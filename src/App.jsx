@@ -34,7 +34,7 @@ function App(props) {
         <>
             <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn} setRole={setRole} role={role}/>
             <Routes>
-                <Route path="/" element={<Home loggedIn={loggedIn} Username={Username}/>}/>
+                <Route path="/" element={<Home loggedIn={loggedIn} Username={Username} UserId={UserId}/>}/>
                 <Route path="search" element={<Search/>}/>
                 <Route path="contact" element={<Contact address={obj}/>}/>
                 <Route path="SingleCharityPage" element={<SingleCharityPage/>}/>

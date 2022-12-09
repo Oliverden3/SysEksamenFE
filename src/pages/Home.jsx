@@ -12,7 +12,7 @@ import SingleCharityPage from "./SingleCharityPage.jsx";
 
 
 
-function Home({loggedIn, Username}) {
+function Home({loggedIn, Username, UserId}) {
     
 
 const [data, setData] = useState([])
@@ -157,7 +157,7 @@ function generateCharityObj(charity){
 
 
     
-            <p>Welcome, {Username}!</p>
+            <p>Welcome, {Username} {UserId}!</p>
             <h1 className='greeting'>Charities</h1>
 
             {!loggedIn ? (<div className='greeting'>Please log in or create an account <PostForm/> </div>) :

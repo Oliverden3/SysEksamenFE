@@ -9,6 +9,7 @@ import apiFacade from "./utils/apiFacade.js";
 import facade from "./utils/apiFacade.js";
 import SingleCharityPage from "./pages/SingleCharityPage.jsx";
 import EditUser from "./components/EditUser.jsx";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App(props) {
 

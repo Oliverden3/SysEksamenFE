@@ -4,10 +4,13 @@ import apiFacade from "../utils/apiFacade.js";
 import Login from "../components/Login.jsx";
 import LoggedIn from "../components/LoggedIn.jsx";
 import "../styles/home.css";
+import "../styles/buttons.css";
 import PostForm from "../components/PostForm.jsx";
 import Contact from "./Contact.jsx";
 import {Route, Routes,useNavigate} from "react-router-dom";
 import SingleCharityPage from "./SingleCharityPage.jsx";
+import "../resources/plusIcon.png";
+import table from "react-bootstrap/Table";
 
 
 
@@ -118,7 +121,9 @@ const removeCharity = (charity) => {
   };
 const genetateButtons = () => {
     return allCharitys.map((Category) => {
-        return <button onClick={() => handleClick(Category)}>{Category}</button>
+        return <>
+            <button className="my-charity" onClick={() => handleClick(Category)}>{Category}</button>
+        </>
     })
 }
 function generateCharityObj(charity){
@@ -137,6 +142,7 @@ function generateCharityObj(charity){
         slug: charity.slug,
         description: description,
         profileUrl: charity.profileUrl,
+        location : charity.location,
 
 
 
@@ -157,7 +163,7 @@ function generateCharityObj(charity){
 
 
     
-            <p>Welcome, {Username} {UserId}!</p>
+            <p>Welcome, {Username} here is the id:{UserId}!</p>
             <h1 className='greeting'>Charities</h1>
 
             {!loggedIn ? (<div className='greeting'>Please log in or create an account <PostForm/> </div>) :
@@ -167,12 +173,12 @@ function generateCharityObj(charity){
                 {isShown && (
                     <div>
                 <ul>
-                    <table>
+                    <table class="table">
                         <thead>
                         <tr>
-                            <th>Charity:</th>
-                            <th>Website:</th>
-                            <th>Category:</th>
+                            <th>Name:</th>
+                            <th>Topics:</th>
+                            <th></th>
                         </tr>
                         </thead>
 
@@ -182,7 +188,13 @@ function generateCharityObj(charity){
                         <tr>
                             <td>{charity.name}</td>
                             <td>{charity.tags +""}</td>
-                            <td><button onClick={() => handleSpeseficCharity(generateCharityObj(charity))}>see more</button></td>
+
+                            <td>
+                            <form onClick={() => handleSpeseficCharity(generateCharityObj(charity))}>
+                            <input type="image" src="src/resources/plusIcon.png" width="30" height="30"/>
+                            </form>
+                            </td>
+
                         </tr>
                         </tbody>
 

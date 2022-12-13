@@ -34,7 +34,7 @@ function PostForm(){
             <form onSubmit={(e)=> submit(e)}>
                 <input onChange={(e)=>handel(e)} id="userName" value={data.userName} placeholder={"username"} type={"text"}></input>
                 <br/>
-                <input onChange={(e)=>handel(e)} id="userPass" value={data.userPass} placeholder={"password"} type={"text"}></input>
+                <input onChange={(e)=>handel(e)} id="userPass" value={data.userPass} placeholder={"password"} type={"password"}></input>
                 <br/>
                 <button>submit</button>
             </form>

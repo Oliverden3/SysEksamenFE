@@ -107,9 +107,17 @@ const handleSpeseficCharity = (charity) =>{
         })
     }
 
+  
+
+
     const handelFavorite = async (charity) => {
 
-        await fetch("http://localhost:8080/api/favorite/" + UserId + "/" + charity.slug)
+        let favoriteInfo ={
+            "UserId": UserId, 
+            "charitySlug": charity.slug   
+        }
+        await fetch("http://localhost:8080/api/charity/favorite/", favoriteInfo)
+        console.log("You just favrorited this charity: " + charity.slug + " with the user: " + UserId);
     }
 
 const genetateButtons = () => {
@@ -119,8 +127,8 @@ const genetateButtons = () => {
 }
 
 function generateCharityObj(charity){
+    
     let description = charity.description
-
     if (description === undefined){
         description = "No description available"
     }else{
@@ -134,16 +142,7 @@ function generateCharityObj(charity){
         slug: charity.slug,
         description: description,
         profileUrl: charity.profileUrl,
-
-
-
-
-
-
-
     }
-
-
     return charityObj
 }
 
@@ -181,7 +180,7 @@ function generateCharityObj(charity){
                             <td>{charity.tags +""}</td>
                             <td><button onClick={()=> handelFavorite(charity)}>this</button> </td>
                             <td><button onClick={() => handleSpeseficCharity(generateCharityObj(charity))}>see more</button></td>
-                           {/* <td><FavoriteForm charitySlug={charity.slug} userId={UserId}/></td>*/}
+                            <td><FavoriteForm userId={UserId} charity={charity}/></td>
                         </tr>
                         </tbody>
 

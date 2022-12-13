@@ -109,7 +109,18 @@ const handleSpeseficCharity = (charity) =>{
         })
     }
 
+  
 
+
+    const handelFavorite = async (charity) => {
+
+        let favoriteInfo ={
+            "UserId": UserId,
+            "charitySlug": charity.slug
+        }
+        await fetch("http://localhost:8080/api/charity/favorite/", favoriteInfo)
+        console.log("You just favrorited this charity: " + charity.slug + " with the user: " + UserId);
+    }
 
 
 const removeCharity = (charity) => {
@@ -126,9 +137,10 @@ const genetateButtons = () => {
         </>
     })
 }
-function generateCharityObj(charity){
-    let description = charity.description
 
+function generateCharityObj(charity){
+    
+    let description = charity.description
     if (description === undefined){
         description = "No description available"
     }else{
@@ -143,16 +155,7 @@ function generateCharityObj(charity){
         description: description,
         profileUrl: charity.profileUrl,
         location : charity.location,
-
-
-
-
-
-
-
     }
-
-
     return charityObj
 }
 
@@ -194,6 +197,8 @@ function generateCharityObj(charity){
                             <input type="image" src="src/resources/plusIcon.png" width="30" height="30"/>
                             </form>
                             </td>
+
+                            <td><FavoriteForm userId={UserId} charity={charity}/></td>
 
                         </tr>
                         </tbody>

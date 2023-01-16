@@ -28,7 +28,7 @@ function App(props) {
         <>
             <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn} setRole={setRole} role={role}/>
             <Routes>
-                <Route path="/" element={<Trip loggedIn={loggedIn} Username={Username} UserId={UserId}/>}/>
+                <Route path="/" element={<Trip loggedIn={loggedIn} Username={Username} UserId={UserId} role={role}/>}/>
                 <Route path='singleCharityPage'element={<SingleCharityPage/>}></Route>
                 <Route path="admin" element={facade.hasUserAccess('admin', loggedIn) && <AdminPageDelete facade={facade} setErrorMessage={setErrorMessage} UserId={UserId}/>}/>
                 <Route path="editUser/:usid" element={<EditUser/>}/>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import LoggedIn from "../components/LoggedIn";
 import { useNavigate } from "react-router-dom";
 import PostForm from "../components/PostForm";
+import axios from "axios";
 
 
 
@@ -10,7 +11,7 @@ import PostForm from "../components/PostForm";
 
 
 
-function Trip ({Username, UserId, loggedIn}) {
+function Trip ({Username, UserId, loggedIn, role}) {
 
 
 const [data, setData] = useState([])
@@ -40,13 +41,15 @@ function generateGuideObj(guide){
         birthYear: guide.birthYear,
         profile: guide.profile,
         imageUrl: guide.imageUrl
-        
-
-        
     }
     return guideObj
 }
 
+const handleDelete = (index) => {
+    axios.delete(`http://localhost:8080/api/trip/${index}`)
+        setData([...data]);
+    window.location.reload(false);
+    }
 
 
 return(
@@ -69,6 +72,11 @@ return(
                 <th>Pakkeliste:</th>
                 <th></th>
                 <th>Guiden:</th>
+                {role !== "admin" ? (<b> </b>) :(<div>
+                <th>
+                    Fjern rejse
+                </th>
+                </div>)}
                 
 
             </tr>
@@ -77,16 +85,18 @@ return(
             
         <tbody>
             <tr>
-                <td></td>
+                <br />
                 <td>{item.date}</td>
                 <td>{item.time}</td>
                 <td>{item.location}</td>
                 <td>{item.duration}</td>
                 <td>{item.packingList}</td>
-                <td></td>
+
+                <br />
                 <td>
                     <button onClick={() => handleSpecificGuide(generateGuideObj(item.fkidGuide))}>Info om guide</button>
-                    </td>
+                </td>
+                <td>{role !=="admin" ? (<div><b> </b></div>):(<div><button onClick={() =>handleDelete(item.id)}>Slet</button></div>)}</td>
                 
             </tr>
         

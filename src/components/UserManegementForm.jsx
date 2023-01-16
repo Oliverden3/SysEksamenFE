@@ -3,7 +3,7 @@ import Axios from "axios";
 
 
 function UserManegementForm(){
-    const url = "http://localhost:8080/api/user/add"
+    const url = "https://www.slothj.com/tomcat/EksamenBackend/api/user/add"
     const [data, setData] = useState({
         "userName": "",
         "userPass": "",

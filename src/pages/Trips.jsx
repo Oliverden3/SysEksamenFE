@@ -20,7 +20,7 @@ const navigate = useNavigate();
 
 
 useEffect(() => {
-     fetch("http://localhost:8080/api/trip/all")
+     fetch("https://www.slothj.com/tomcat/EksamenBackend/api/trip/all")
         .then(res =>{
             if(res.ok){
                 return res.json()
@@ -46,7 +46,7 @@ function generateGuideObj(guide){
 }
 
 const handleDelete = (index) => {
-    axios.delete(`http://localhost:8080/api/trip/${index}`)
+    axios.delete(`https://www.slothj.com/tomcat/EksamenBackend/api/trip/${index}`)
         setData([...data]);
     window.location.reload(false);
     }

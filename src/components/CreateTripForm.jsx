@@ -3,7 +3,7 @@ import Axios from "axios";
 
 
 function CreateTripForm(){
-    const url = "http://localhost:8080/api/trip/add"
+    const url = "https://www.slothj.com/tomcat/EksamenBackend/api/trip/add"
     const [data, setData] = useState({
         "date": "",
         "time": "",

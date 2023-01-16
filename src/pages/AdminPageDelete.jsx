@@ -19,7 +19,7 @@ function AdminPageDelete({UserId}) {
 
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/user/all")
+        fetch("https://www.slothj.com/tomcat/EksamenBackend/api/user/all")
             .then(res =>{
                 if(res.ok){
                     return res.json()
@@ -28,7 +28,7 @@ function AdminPageDelete({UserId}) {
     }, [])
 
     const handelDelete = (index) => {
-    axios.delete(`http://localhost:8080/api/user/${index}`)
+    axios.delete(`https://www.slothj.com/tomcat/EksamenBackend/api/user/${index}`)
         setUsers([...users]);
     window.location.reload(false);
     }

@@ -3,7 +3,7 @@ import Axios from "axios";
 
 
 function CreateGuideForm(){
-    const url = "http://localhost:8080/api/guide/add"
+    const url = "https://www.slothj.com/tomcat/EksamenBackend/api/guide/add"
     const [data, setData] = useState({
         "gender": "",
         "birthYear": "",

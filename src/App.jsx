@@ -10,6 +10,7 @@ import facade from "./utils/apiFacade.js";
 import SingleCharityPage from "./pages/SingleCharityPage.jsx";
 import EditUser from "./components/EditUser.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Trip from './pages/Trips.jsx';
 
 function App(props) {
 
@@ -23,22 +24,12 @@ function App(props) {
         if(apiFacade.getToken()) setLoggedIn(true), setRole(apiFacade.getUserRoles(),setUsername(apiFacade.getUsername),setUserId(apiFacade.getUserId))
     })
 
-
-    const obj = {
-        name: "TestName",
-        street: "TestStreet",
-        town: "TestTown",
-        country: "TestCountry",
-    }
-
     return (
         <>
             <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn} setRole={setRole} role={role}/>
             <Routes>
-                <Route path="/" element={<Home loggedIn={loggedIn} Username={Username} UserId={UserId}/>}/>
-                <Route path="search" element={<Search/>}/>
-                <Route path="contact" element={<Contact address={obj}/>}/>
-                <Route path="SingleCharityPage" element={<SingleCharityPage/>}/>
+                <Route path="/" element={<Trip loggedIn={loggedIn} Username={Username} UserId={UserId}/>}/>
+                <Route path='singleCharityPage'element={<SingleCharityPage/>}></Route>
                 <Route path="admin" element={facade.hasUserAccess('admin', loggedIn) && <AdminPageDelete facade={facade} setErrorMessage={setErrorMessage} UserId={UserId}/>}/>
                 <Route path="editUser/:usid" element={<EditUser/>}/>
                 <Route path="*" element={<h1>Page Not Found !!!!</h1>}/>

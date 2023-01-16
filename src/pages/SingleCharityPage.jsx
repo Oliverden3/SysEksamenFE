@@ -6,18 +6,37 @@ function SingleCharityPage() {
     const location = useLocation();
 
 
-    let charity = location.state.charity;
-    console.log(charity)
+    let guide = location.state.guide;
+    console.log(guide)
 
     return (
         <div>
-            <h1>{charity.name}</h1>
-            <br/>
-            <h4>{charity.description}</h4>
-            <br/>
-            <p>{charity.location}</p>
 
-            <td> <a href={charity.profileUrl}>{charity.profileUrl}</a></td>
+            <table>
+            <thead>
+                <tr>
+                    <th>Guide Id: </th>
+                    <th>Guide køn: </th>
+                    <th>Guide fødselsår: </th>
+                    <th>Information:</th>
+                    <th>Billede:</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>{guide.id}</td>
+                    <td>{guide.gender}</td>
+                    <td>{guide.birthYear}</td>
+                    <td>{guide.profile}</td>
+                    <td>{guide.imageUrl}</td>
+                </tr>
+            </tbody>
+
+            </table>
+            
+            <br/>
+        
 
         </div>
     );

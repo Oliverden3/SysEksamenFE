@@ -1,14 +1,16 @@
 import React, {useEffect, useRef, useState} from 'react';
 import PostForm from "../components/PostForm.jsx";
-import Blacklist from '../components/BlackListForm.jsx';
 import axios from "axios";
 import EditUser from "../components/EditUser.jsx";
 import {useNavigate} from "react-router-dom";
+import CreateTripForm from '../components/CreateTripForm.jsx';
+import CreateGuideForm from '../components/CreateGuideForm.jsx';
 
 function AdminPageDelete({UserId}) {
 
     const inputRef = useRef();
     const [items, setItems] = useState([]);
+    const [users, setUsers] = useState([])
     const [charity, setCharity] = useState([]);
     const navigate = useNavigate();
     console.log(inputRef.current)
@@ -22,12 +24,12 @@ function AdminPageDelete({UserId}) {
                 if(res.ok){
                     return res.json()
                 }
-            }).then(jsonResponse => setCharity(jsonResponse))
+            }).then(jsonResponse => setUsers(jsonResponse))
     }, [])
 
     const handelDelete = (index) => {
     axios.delete(`http://localhost:8080/api/user/${index}`)
-        setCharity([...charity]);
+        setUsers([...users]);
     window.location.reload(false);
     }
 
@@ -47,7 +49,10 @@ function AdminPageDelete({UserId}) {
 
 
             {UserId}
-                
+            {<CreateTripForm/>}
+            {<CreateGuideForm/>}
+            <br /> 
+            
                 <ul>
                     <table>
                         <tr>
@@ -56,7 +61,7 @@ function AdminPageDelete({UserId}) {
                             <th>Role</th>
                         </tr>
 
-                    {charity.map(item => (
+                    {   users.map(item => (
 
                             <tr>
                                 <td>{item.id}</td>
@@ -72,7 +77,7 @@ function AdminPageDelete({UserId}) {
 
                     </table>
                 </ul>
-                        <Blacklist/>
+                
 
         </div>
     );
